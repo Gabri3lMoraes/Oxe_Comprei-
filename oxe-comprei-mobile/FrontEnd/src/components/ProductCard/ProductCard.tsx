@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
-import { styles } from './Card.style';
+import { styles } from './ProductCard.style';
 
 // Atualizamos a interface para aceitar ImageSourcePropType
 interface CardProps {
