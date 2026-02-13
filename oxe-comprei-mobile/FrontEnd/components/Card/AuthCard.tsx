@@ -82,7 +82,7 @@ export default function Register() {
 
             {!isRegister && (
               <View style={styles.socialContainer}>
-                <TouchableOpacity style={styles.socialIcon}>
+                <TouchableOpacity style={styles.socialIcon} >
                   <Image 
                     source={{ uri: 'https://img.icons8.com/color/48/000000/google-logo.png' }} 
                     style={styles.iconImg} 
