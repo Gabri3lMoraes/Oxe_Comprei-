@@ -27,7 +27,7 @@ export const Navbar = ({ activePage, onNavigate }: NavbarProps) => {
         onPress={() => onNavigate && onNavigate('map')}
       >
         <Image 
-          source={require('../../assets/icons/map.png')} 
+          source={require('../../../assets/icons/map.png')} 
           style={[
             styles.icon, 
             { tintColor: activePage === 'map' ? ACTIVE_COLOR : INACTIVE_COLOR }
@@ -46,7 +46,7 @@ export const Navbar = ({ activePage, onNavigate }: NavbarProps) => {
         onPress={() => onNavigate && onNavigate('home')}
       >
         <Image 
-          source={require('../../assets/icons/home.png')} 
+          source={require('../../../assets/icons/home.png')} 
           style={[
             styles.icon,
             // Se for home, ícone branco. Se não, ícone cinza escuro
@@ -62,7 +62,7 @@ export const Navbar = ({ activePage, onNavigate }: NavbarProps) => {
         onPress={() => onNavigate && onNavigate('profile')}
       >
         <Image 
-          source={require('../../assets/icons/profile.png')} 
+          source={require('../../../assets/icons/profile.png')} 
           style={[
             styles.icon, 
             { tintColor: activePage === 'profile' ? ACTIVE_COLOR : INACTIVE_COLOR }

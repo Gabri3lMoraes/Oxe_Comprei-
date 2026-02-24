@@ -11,9 +11,16 @@ import {
   Platform,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// Importamos o tipo que criamos no arquivo de rotas
+import { RootStackParamList } from "../../routes/AppRoutes"; 
 
 export default function AuthCard() {
   const [isRegister, setIsRegister] = useState(false);
+  
+  // Tipando o navigation para reconhecer as rotas 'Auth' e 'Home'
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <KeyboardAvoidingView
@@ -22,7 +29,7 @@ export default function AuthCard() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
-        {/* HEADER - Título Estilizado */}
+        {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.brandContainer}>
             <Text style={styles.oxeText}>oxê</Text>
@@ -76,7 +83,11 @@ export default function AuthCard() {
               </TouchableOpacity>
             )}
 
-            <TouchableOpacity style={styles.mainButton}>
+            {/* BOTÃO COM NAVEGAÇÃO CORRIGIDA */}
+            <TouchableOpacity 
+              style={styles.mainButton} 
+              onPress={() => navigation.navigate('Home')}
+            >
               <Text style={styles.buttonText}>Continuar</Text>
             </TouchableOpacity>
 
@@ -114,49 +125,26 @@ export default function AuthCard() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FDEEDC", // Cor de fundo pêssego suave da imagem
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingBottom: 40,
-  },
+  container: { flex: 1, backgroundColor: "#FDEEDC" },
+  scrollContent: { flexGrow: 1, paddingBottom: 40 },
   header: {
-    backgroundColor: "#F27D31", // Laranja vibrante
+    backgroundColor: "#F27D31",
     paddingTop: 60,
     paddingBottom: 80,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     alignItems: "center",
   },
-  brandContainer: {
-    alignItems: "center",
-  },
-  oxeText: {
-    fontSize: 80,
-    fontWeight: "900",
-    color: "#FFD700", // Amarelo
-    lineHeight: 80,
-  },
-  compreiText: {
-    fontSize: 40,
-    fontWeight: "bold",
-    color: "#FFF",
-    marginTop: -10,
-  },
-  subtitle: {
-    color: "#FFF",
-    fontSize: 16,
-    marginTop: 10,
-    fontWeight: "600",
-  },
+  brandContainer: { alignItems: "center" },
+  oxeText: { fontSize: 80, fontWeight: "900", color: "#FFD700", lineHeight: 80 },
+  compreiText: { fontSize: 40, fontWeight: "bold", color: "#FFF", marginTop: -10 },
+  subtitle: { color: "#FFF", fontSize: 16, marginTop: 10, fontWeight: "600" },
   card: {
     backgroundColor: "#FFF",
     borderRadius: 35,
     padding: 30,
     width: "90%",
-    marginTop: -50, // Faz o card "subir" para cima do fundo laranja
+    marginTop: -50,
     alignSelf: "center",
     elevation: 10,
     shadowColor: "#000",
@@ -164,12 +152,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 20,
   },
-  cardTitle: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#000",
-    marginBottom: 20,
-  },
+  cardTitle: { fontSize: 28, fontWeight: "bold", color: "#000", marginBottom: 20 },
   form: { gap: 15 },
   inputContainer: {
     flexDirection: "row",
@@ -180,19 +163,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 55,
   },
-  input: {
-    flex: 1,
-    marginLeft: 10,
-    fontSize: 16,
-  },
-  forgotPass: {
-    alignSelf: "flex-end",
-  },
-  forgotText: {
-    color: "#F27D31",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
+  input: { flex: 1, marginLeft: 10, fontSize: 16 },
+  forgotPass: { alignSelf: "flex-end" },
+  forgotText: { color: "#F27D31", fontSize: 12, fontWeight: "bold" },
   mainButton: {
     backgroundColor: "#F27D31",
     borderRadius: 15,
@@ -201,17 +174,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  socialContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 20,
-    marginTop: 10,
-  },
+  buttonText: { color: "#FFF", fontSize: 18, fontWeight: "bold" },
+  socialContainer: { flexDirection: "row", justifyContent: "center", gap: 20, marginTop: 10 },
   socialIcon: {
     width: 60,
     height: 60,
@@ -220,23 +184,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     elevation: 4,
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
   },
-  iconImg: {
-    width: 30,
-    height: 30,
-  },
-  footer: {
-    marginTop: 15,
-    alignItems: "center",
-  },
-  footerText: {
-    fontSize: 14,
-    color: "#333",
-  },
-  linkText: {
-    color: "#F27D31",
-    fontWeight: "bold",
-  },
+  iconImg: { width: 30, height: 30 },
+  footer: { marginTop: 15, alignItems: "center" },
+  footerText: { fontSize: 14, color: "#333" },
+  linkText: { color: "#F27D31", fontWeight: "bold" },
 });

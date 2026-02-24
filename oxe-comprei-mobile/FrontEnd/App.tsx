@@ -1,15 +1,17 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
-import AuthScreen from "./src/views/screens/auth/AuthScreen";
+import { StyleSheet } from "react-native";
+import { AppRoutes } from "./src/routes/AppRoutes";
+
 
 
 export default function App() {
   return (
     // Adicione o estilo flex: 1 aqui
-    <View style={styles.container}>
-      <AuthScreen />
+    <NavigationContainer>
+      <AppRoutes />
       <StatusBar style="light" />
-    </View>
+    </NavigationContainer>
   );
 }
 
