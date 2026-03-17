@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { View, StyleSheet } from "react-native";
+import AuthScreen from "../oxe-comprei-mobile/src/screens/auth/AuthScreen";
+
 
 export default function App() {
   return (
+    // Adicione o estilo flex: 1 aqui
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <AuthScreen />
+      <StatusBar style="light" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1, // Isso faz a View ocupar a tela toda
   },
 });
