@@ -157,6 +157,7 @@ export default function MapScreen() {
           <Text style={styles.sectionTitle}>Lojas Próximas</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storesScroll}>
             {LOJAS.map((loja) => (
+                
               <View key={loja.id} style={styles.storeCard}>
                 <Image source={{ uri: loja.imagem }} style={styles.storeImage} />
                 <View style={styles.storeInfo}>
