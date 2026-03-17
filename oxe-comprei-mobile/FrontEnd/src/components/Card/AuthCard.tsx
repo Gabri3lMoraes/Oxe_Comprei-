@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,23 +11,33 @@ import {
   Platform,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-// Importamos o tipo que criamos no arquivo de rotas
 import { RootStackParamList } from "../../routes/AppRoutes"; 
 
 export default function AuthCard() {
-  const [isRegister, setIsRegister] = useState(false);
-  
-  // Tipando o navigation para reconhecer as rotas 'Auth' e 'Home'
+  // Pegamos os parâmetros da rota
+  const route = useRoute<RouteProp<RootStackParamList, 'Auth'>>();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
+  // Estado que controla se mostra Login ou Cadastro
+  const [isRegister, setIsRegister] = useState(false);
+
+  // Efeito para mudar o modo da tela assim que ela carregar
+  useEffect(() => {
+    if (route.params?.screenMode === 'register') {
+      setIsRegister(true);
+    } else {
+      setIsRegister(false);
+    }
+  }, [route.params]);
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* HEADER */}
         <View style={styles.header}>
@@ -83,7 +93,6 @@ export default function AuthCard() {
               </TouchableOpacity>
             )}
 
-            {/* BOTÃO COM NAVEGAÇÃO CORRIGIDA */}
             <TouchableOpacity 
               style={styles.mainButton} 
               onPress={() => navigation.navigate('Home')}

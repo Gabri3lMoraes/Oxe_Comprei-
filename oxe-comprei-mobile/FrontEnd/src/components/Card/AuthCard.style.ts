@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   card: {
@@ -61,5 +61,12 @@ export const styles = StyleSheet.create({
     color: "#FF7B2A",
     fontSize: 14,
     fontWeight: "600",
+  },
+  inputError: {
+    borderColor: "red",
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
   },
 });
