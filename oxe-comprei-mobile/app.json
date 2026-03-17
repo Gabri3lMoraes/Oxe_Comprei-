@@ -1,7 +1,19 @@
 {
-  "plugins": [
-    "expo-font",
-    "expo-router",
-    "expo-secure-store"
-  ]
+  "expo": {
+    "name": "Oxe-Comprei",
+    "slug": "Oxe-Comprei-mobile",
+    "android": {
+      "package": "com.seu.pacote",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC3bqKtj2LI3wxH3t_HnfhT7YMBCECJPYg"
+        }
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8a2576b1-f09f-4580-a211-1d0f0d33da5f"
+      }
+    }
+  }
 }
