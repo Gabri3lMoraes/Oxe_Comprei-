@@ -6,7 +6,7 @@
       "package": "com.seu.pacote",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyC3bqKtj2LI3wxH3t_HnfhT7YMBCECJPYg"
+          "apiKey": "exemplo coloque sua chave"
         }
       }
     },

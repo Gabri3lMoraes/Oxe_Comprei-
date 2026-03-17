@@ -108,8 +108,21 @@ export default function MapScreen() {
         showsUserLocation={true} 
         showsMyLocationButton={false}
       >
-        {LOJAS.map((loja) => (
-          <Marker key={loja.id} coordinate={loja.coords} title={loja.nome} description={loja.distancia} pinColor="#FF6600" />
+       {LOJAS.map((loja) => (
+          <Marker 
+            key={loja.id} 
+            coordinate={loja.coords}
+            title={loja.nome}
+            description={loja.distancia}
+          >
+            {/* NOSSO PINO CUSTOMIZADO */}
+            <View style={styles.customMarkerWrapper}>
+              <View style={styles.customMarker}>
+                <Feather name="shopping-bag" size={16} color="#FFF" />
+              </View>
+              <View style={styles.markerPointer} />
+            </View>
+          </Marker>
         ))}
       </MapView>
 
@@ -216,4 +229,32 @@ const styles = StyleSheet.create({
   storeDistance: { fontSize: 13, fontWeight: '700', color: '#FF6600' },
   btnVerLoja: { backgroundColor: '#FF6600', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 8 },
   btnVerLojaText: { color: '#FFF', fontSize: 11, fontWeight: '700' },
+  // ESTILOS DO MARCADOR CUSTOMIZADO
+  customMarkerWrapper: {
+    alignItems: 'center',
+  },
+  customMarker: {
+    backgroundColor: '#FF6600',
+    padding: 8,
+    borderRadius: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  markerPointer: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderLeftWidth: 6,
+    borderRightWidth: 6,
+    borderBottomWidth: 8,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#FF6600',
+    transform: [{ rotate: '180deg' }],
+    marginTop: -1, // Junta a bolinha com o triângulo
+  },
 });
