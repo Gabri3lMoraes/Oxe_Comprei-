@@ -22,7 +22,7 @@ export default function FloatingNavBar() {
 
 const styles = StyleSheet.create({
   floatingNavBar: { position: 'absolute', bottom: 20, left: 0, right: 0, alignItems: 'center' },
-  navBarContainer: { flexDirection: 'row', backgroundColor: '#FFF', width: 220, height: 60, borderRadius: 30, justifyContent: 'space-around', alignItems: 'center', elevation: 10 },
+  navBarContainer: { flexDirection: 'row', backgroundColor: '#FFF', width: 220, height: 60, borderRadius: 30, justifyContent: 'space-around', alignItems: 'center', elevation: 11 },
   navItem: { width: 45, height: 45, borderRadius: 25, justifyContent: 'center', alignItems: 'center' },
   navItemActive: { backgroundColor: '#FF6600' },
 });
