@@ -2,12 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet } from "react-native";
 import AuthScreen from "../oxe-comprei-mobile/src/screens/auth/AuthScreen";
 import Mapa from "../oxe-comprei-mobile/src/screens/MapHome/Mapa"
-
+import ExploreHome from "@/screens/ExploreHome/ExploreHome";
+import Routes from './src/routes'; 
 export default function App() {
   return (
-    // Adicione o estilo flex: 1 aqui
+    
     <View style={styles.container}>
-      <Mapa />
+      <Routes />
       <StatusBar style="light" />
     </View>
   );
@@ -15,6 +16,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Isso faz a View ocupar a tela toda
+    flex: 1, 
   },
 });
