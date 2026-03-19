@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { 
   StyleSheet, Text, View, Image, TextInput, 
-  ScrollView, TouchableOpacity, Dimensions, Platform 
+  ScrollView, TouchableOpacity, Dimensions 
 } from 'react-native';
-import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
-
-import FloatingNavBar from '../../components/map/FloatingNavBar';
+import { Feather, Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
@@ -68,12 +66,16 @@ const CATEGORIAS_PRINCIPAIS = [
   { id: '5', nome: 'Utilidades', icone: 'bed-outline' },
 ];
 
-// Categorias de exploração
-const CATEGORIAS_EXPLORAR = [
-  { id: 'ビーチ', nome: 'Roupas de Praia', icone: 'sunny-outline' },
-  { id: 'スクール', nome: 'Material Escolar', icone: 'school-outline' },
-  { id: 'トイ', nome: 'Brinquedos', icone: 'gift-outline' },
-  { id: 'シューズ', nome: 'Calçados', icone: 'walk-outline' },
+// MOCK PARA O FEED INFINITO (Simulando o Algoritmo)
+const PRODUTOS_FEED = [
+  { id: 'f1', nome: 'Fone Sem Fio Bluetooth Premium', preco: 'R$ 120,00', lojaNome: 'Tech Olinda', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300' },
+  { id: 'f2', nome: 'Tênis Esportivo Confort', preco: 'R$ 189,90', lojaNome: 'Pé Quente Calçados', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300' },
+  { id: 'f3', nome: 'Relógio Smartwatch', preco: 'R$ 250,00', lojaNome: 'Eletro Mix', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300' },
+  { id: 'f4', nome: 'Óculos de Sol Vintage', preco: 'R$ 85,00', lojaNome: 'Ótica Vista Mar', img: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300' },
+  { id: 'f5', nome: 'Mochila Impermeável', preco: 'R$ 145,00', lojaNome: 'Papelaria Central', img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300' },
+  { id: 'f6', nome: 'Kit Skincare Facial', preco: 'R$ 95,00', lojaNome: 'Bela Cosméticos', img: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300' },
+  { id: 'f7', nome: 'Garrafa Térmica 1L', preco: 'R$ 65,00', lojaNome: 'Utilidades Nordeste', img: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300' },
+  { id: 'f8', nome: 'Jaqueta Jeans', preco: 'R$ 150,00', lojaNome: 'Boutique Beira Mar', img: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=300' },
 ];
 
 export default function ExploreHome() {
@@ -117,7 +119,7 @@ export default function ExploreHome() {
 
         {/* Banner */}
         <View style={styles.bannerContainer}>
-        
+          <Image source={require('../../../assets/banners/banner.png')} style={styles.bannerImage} />
         </View>
 
         {/* Categorias Principais */}
@@ -162,45 +164,35 @@ export default function ExploreHome() {
           ))}
         </ScrollView>
 
-        {/* Seção Explorar */}
-        <View style={[styles.sectionHeader, { marginTop: 20 }]}><Text style={styles.sectionTitle}>Explorar</Text></View>
+        {/* Seção Explorar (Algoritmo / Feed Infinito) */}
+        <View style={[styles.sectionHeader, { marginTop: 20 }]}>
+          <Text style={styles.sectionTitle}>Feito para você</Text>
+        </View>
         
-        {CATEGORIAS_EXPLORAR.map(cat_explorar => {
-            const produtosDaCategoria = TODOS_PRODUTOS.filter(p => p.categoria === cat_explorar.nome).slice(0, 4);
-            return (
-                <View key={cat_explorar.id} style={styles.exploreCategory}>
-                    <View style={styles.exploreHeader}>
-                        <Ionicons name={cat_explorar.icone as any} size={20} color="#FF6600" />
-                        <Text style={styles.exploreTitle}>{cat_explorar.nome}</Text>
-                    </View>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.productsScroll}>
-                    {produtosDaCategoria.map((item) => (
-                        <TouchableOpacity key={item.id} style={styles.productCardSmall}>
-                            <Image source={{ uri: item.img }} style={styles.productImageSmall} />
-                            <View style={styles.productInfoSmall}>
-                            <Text style={styles.productNameSmall} numberOfLines={1}>{item.nome}</Text>
-                            <Text style={styles.productPriceSmall}>{item.preco}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    ))}
-                    </ScrollView>
-                </View>
-            );
-        })}
+        <View style={styles.gridContainer}>
+          {PRODUTOS_FEED.map((item) => (
+            <TouchableOpacity key={item.id} style={styles.gridCard}>
+              <Image source={{ uri: item.img }} style={styles.gridImage} />
+              <View style={styles.gridInfo}>
+                <Text style={styles.gridPrice}>{item.preco}</Text>
+                <Text style={styles.gridName} numberOfLines={2}>{item.nome}</Text>
+                <Text style={styles.gridLoja} numberOfLines={1}>📍 {item.lojaNome}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
 
       </ScrollView>
-
-      <FloatingNavBar />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFFFF' },
-  scrollContent: { paddingBottom: 100 },
+  scrollContent: { paddingBottom: 100 }, // Espaço para a barra flutuante não cobrir o conteúdo
   
   // Cabeçalho
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 20, marginBottom: 15 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 40, marginBottom: 15 },
   headerTitle: { fontSize: 24, fontWeight: '700', color: '#FF6600' },
   addressRow: { flexDirection: 'row', alignItems: 'center' },
   headerSub: { fontSize: 12, color: '#999', marginLeft: 4 },
@@ -221,7 +213,7 @@ const styles = StyleSheet.create({
 
   // Categorias Principais
   categoriesScroll: { paddingLeft: 20, marginBottom: 25 },
-  categoryCard: { width: 90, height: 100, backgroundColor: '#FFF', borderRadius: 20, marginRight: 15, justifyContent: 'center', alignItems: 'center', elevation: 3 },
+  categoryCard: { width: 90, height: 100, backgroundColor: '#FFF', borderRadius: 20, marginRight: 15, justifyContent: 'center', alignItems: 'center'  },
   categoryCardActive: { backgroundColor: '#FF6600' },
   categoryText: { fontSize: 13, fontWeight: '600', color: '#666', marginTop: 10 },
   categoryTextActive: { color: '#FFF' },
@@ -246,13 +238,34 @@ const styles = StyleSheet.create({
   productPrice: { fontSize: 16, fontWeight: 'bold', color: '#FF6600', marginTop: 5 },
   productLoja: { fontSize: 10, color: '#999', marginTop: 2 },
 
-  // Explorar (Categoria + Produtos pequenos)
-  exploreCategory: { marginBottom: 15 },
-  exploreHeader: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20 },
-  exploreTitle: { fontSize: 15, fontWeight: '700', color: '#333', marginLeft: 8 },
-  productCardSmall: { width: 100, backgroundColor: '#FFF', borderRadius: 12, marginRight: 12, padding: 6, elevation: 2, marginBottom: 5 },
-  productImageSmall: { width: '100%', height: 80, borderRadius: 8 },
-  productInfoSmall: { marginTop: 5 },
-  productNameSmall: { fontSize: 11, color: '#333' },
-  productPriceSmall: { fontSize: 13, fontWeight: 'bold', color: '#FF6600' },
+  // Novo Feed Explorar (Grid 2 colunas)
+  gridContainer: { 
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    justifyContent: 'space-between', 
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  gridCard: { 
+    width: '48%', 
+    backgroundColor: '#FFF', 
+    borderRadius: 15, 
+    padding: 10, 
+    marginBottom: 15, 
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  gridImage: { 
+    width: '100%', 
+    height: 140, 
+    borderRadius: 10, 
+    marginBottom: 8 
+  },
+  gridInfo: { flex: 1, justifyContent: 'space-between' },
+  gridPrice: { fontSize: 16, fontWeight: 'bold', color: '#FF6600' },
+  gridName: { fontSize: 13, color: '#333', marginTop: 4, minHeight: 35 },
+  gridLoja: { fontSize: 11, color: '#999', marginTop: 4 },
 });

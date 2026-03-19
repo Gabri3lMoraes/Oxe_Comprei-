@@ -56,7 +56,7 @@ export default function FloatingNavBar(props: any) {
         </TouchableOpacity>
 
         {/* Botão Perfil (Sem navegação por enquanto) */}
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navegar('Perfil')}>
           <Feather name="user" size={24} color={nomeDaTelaAtual === 'Perfil' ? '#FFF' : '#666'} />
         </TouchableOpacity>
 
